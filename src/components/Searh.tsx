@@ -1,25 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 
-function Counter() {
+function Counter({name}:any) {
   const [count, setCount] = useState(0);
+  const countRef = useRef(0);
 
-  useEffect(() => {
-    console.log("useEffect ran");
-    document.title = `Count: ${count}`;
-  }, [count]);
+  function handleClick() {
+    setCount(count + 1);
+    countRef.current = countRef.current + 1;
+  }
 
   return (
-    <div>
-      <h1>Count: {count}</h1>
+    <button onClick={handleClick}>
+      {count} <br />
+      {name}
 
-      <button onClick={() => setCount(count + 1)}>
-        +
-      </button>
-
-      <button onClick={() => setCount(count - 1)}>
-        -
-      </button>
-    </div>
+    </button>
   );
 }
 
